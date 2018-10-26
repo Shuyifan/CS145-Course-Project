@@ -77,13 +77,6 @@ def dictProcess(attribute, data):
                 else:
                     output_df[attribute + "_" + key][i] = 0
 
-    for col in output_df.columns.tolist():
-        for i in range(len(dict_list)):
-            if(output_df[col][i] == 0):
-                output_df[col][i] = -1
-            elif(output_df[col][i] == -1):
-                output_df[col][i] = None 
-
     return output_df
 
 """
@@ -113,23 +106,46 @@ def timeProcess(attribute, data):
                 output_df[attribute + "_" + new_attribute[1]][i] = 1440 + (minute2 - minute1)
     return output_df
 
-########To be finished
 """
-The function to preprocess a boolean like column, TRUE -> 1, FALSE -> -1
-:param attribute: the column name of the boolean like column
+The function to preprocess a multi-class categories (including boolean) column, encoding it into a hot vector, plus a column "_isMissing"
+:param attribute: the column name of the multi-class categories column
 :param data: the data frame for preprocessing
 :type attribute: str
 :type data: pandas.DataFrame
-:returns: return a new dataframe which is the result preprocessing the boolean like column
+:returns: return a new dataframe which is the result preprocessing the multi-class categories column
 :rtype: pandas.DataFrame
 """
-def booleanProcess(attribute, data):
-    #df = data[attribute]
-    #output_df = pd.DataFrame(np.zeros((df.shape[0], 1)), columns=[attribute])
+def categoriesProcess(attribute, data):
+    df = data[attribute]
+    keys = set()
+    for i in range(df.shape[0]):
+        keys.add(df[i])
+            
+    print("Number of categories")
+    print(len(keys))
+    
+    output_df = pd.DataFrame(np.zeros((df.shape[0], len(keys))), columns=[attribute + "_" + str(s1) for s1 in keys])
+
+    for i in range(df.shape[0]):
+        output_df[attribute + "_" + str(df[i])][i] = 1
+    return output_df
+
+"""
+The function to preprocess a column with missing numeric data
+:param attribute: the column name of the column with missing numeric data
+:param data: the data frame for preprocessing
+:param insert: the way we want to insert the missing value. 
+               'mean': insert the missing with the mean of the column
+               'mode': insert the missing with the mode of the column
+:type attribute: str
+:type data: pandas.DataFrame
+:type insert: str
+"""
+def numericColumnProcess(attribute, data, insert = 'mean'):
+    if(insert == 'mean'):
+        insertNum = data[attribute].mean().values[0]
+    elif(insert == 'mode'):
+        insertNum = data[attribute].mode().values[0]
     for i in range(data.shape[0]):
-        if(isinstance(data[attribute][i], bool)):
-            if(data[attribute][i]):
-                data.loc[i, attribute] = 1    
-            else:
-                data.loc[i, attribute] = -1
-    return data
+        if(np.isnan(data[attribute][i])):
+            data.loc[i, attribute] = insertNum
