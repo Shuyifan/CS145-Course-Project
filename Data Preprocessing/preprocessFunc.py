@@ -28,7 +28,7 @@ def listProcess(attribute, data):
     print("Number of categories")
     print(len(keys))
 
-    output_df = pd.DataFrame(np.zeros((len(row_list), len(keys))) - 1, columns=[attribute + "_" + s1 for s1 in keys])
+    output_df = pd.DataFrame(np.zeros((len(row_list), len(keys))), columns=[attribute + "_" + s1 for s1 in keys])
 
     for i in range(len(row_list)):
         for word in row_list[i]:
@@ -65,7 +65,7 @@ def dictProcess(attribute, data):
     print("Number of key values in this column")
     print(len(keys))
 
-    output_df = pd.DataFrame(np.zeros((len(dict_list), len(keys))) - 1, columns=[attribute + "_" + s1 for s1 in keys])
+    output_df = pd.DataFrame(np.zeros((len(dict_list), len(keys))), columns=[attribute + "_" + s1 for s1 in keys])
 
 
 
@@ -129,7 +129,7 @@ def booleanProcess(attribute, data):
     for i in range(data.shape[0]):
         if(isinstance(data[attribute][i], bool)):
             if(data[attribute][i]):
-                data[i, attribute] = 1    
+                data.loc[i, attribute] = 1    
             else:
-                data[i, attribute] = -1
+                data.loc[i, attribute] = -1
     return data

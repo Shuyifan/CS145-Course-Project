@@ -1,8 +1,8 @@
 import pandas as pd
 
-reviews_location = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/test_queries.csv'
-bussiness_location = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/after preprocess/final_output.csv'
-users_location = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/users.csv'
+reviews_location = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/train_reviews.csv'
+bussiness_location = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/business.csv'
+users_location = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/after preprocess/users_transformed.csv'
 output_location = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/after preprocess/join_train_queries.csv'
 
 reviews = pd.read_csv(reviews_location)
