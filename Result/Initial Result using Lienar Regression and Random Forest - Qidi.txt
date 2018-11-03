@@ -1,0 +1,7 @@
+Linear Regression
+training error: 1.0034983409007958
+testing error: 1.0526230022791017
+
+Random Forest
+training error: 0.3798323897591327
+testing error: 1.0746892677354853
