@@ -4,12 +4,16 @@ import time
 
 """
 The function to preprocess a list like column by using one-hot encoding
+
 :param attribute: the column name of the list like column
 :param data: the data frame for preprocessing
+
 :type attribute: str
 :type data: pandas.DataFrame
-:returns: return a new dataframe which is the result preprocessing the list like column
-:rtype: pandas.DataFrame
+
+:returns output_df: return a new dataframe which is the result preprocessing the list like column
+
+:rtype output_df: pandas.DataFrame
 """
 def listProcess(attribute, data):
     df = data[attribute]
@@ -38,12 +42,16 @@ def listProcess(attribute, data):
 
 """
 The function to preprocess a dictionary like column by using one-hot encoding
+
 :param attribute: the column name of the dictionary like column
 :param data: the data frame for preprocessing
+
 :type attribute: str
 :type data: pandas.DataFrame
-:returns: return a new dataframe which is the result preprocessing the dictionary like column
-:rtype: pandas.DataFrame
+
+:returns output_df: return a new dataframe which is the result preprocessing the dictionary like column
+
+:rtype output_df: pandas.DataFrame
 """
 def dictProcess(attribute, data):
     df = data[attribute]
@@ -81,12 +89,16 @@ def dictProcess(attribute, data):
 
 """
 The function to preprocess a time-period like column
+
 :param attribute: the column name of the time-period like column
 :param data: the data frame for preprocessing
+
 :type attribute: str
 :type data: pandas.DataFrame
-:returns: return a new dataframe which is the result preprocessing the  time-period like column
-:rtype: pandas.DataFrame
+
+:returns output_df: return a new dataframe which is the result preprocessing the  time-period like column
+
+:rtype output_df: pandas.DataFrame
 """
 def timeProcess(attribute, data):
     df = data[attribute]
@@ -108,12 +120,16 @@ def timeProcess(attribute, data):
 
 """
 The function to preprocess a multi-class categories (including boolean) column, encoding it into a hot vector, plus a column "_isMissing"
+
 :param attribute: the column name of the multi-class categories column
 :param data: the data frame for preprocessing
+
 :type attribute: str
 :type data: pandas.DataFrame
-:returns: return a new dataframe which is the result preprocessing the multi-class categories column
-:rtype: pandas.DataFrame
+
+:returns output_df: return a new dataframe which is the result preprocessing the multi-class categories column
+
+:rtype output_df: pandas.DataFrame
 """
 def categoriesProcess(attribute, data):
     df = data[attribute]
@@ -132,11 +148,13 @@ def categoriesProcess(attribute, data):
 
 """
 The function to preprocess a column with missing numeric data
+
 :param attribute: the column name of the column with missing numeric data
 :param data: the data frame for preprocessing
 :param insert: the way we want to insert the missing value. 
                'mean': insert the missing with the mean of the column
                'mode': insert the missing with the mode of the column
+
 :type attribute: str
 :type data: pandas.DataFrame
 :type insert: str
