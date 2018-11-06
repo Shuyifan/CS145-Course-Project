@@ -84,8 +84,8 @@ The function to perform a random forest based on a training data. Then calculate
 :rtype test_error: float
 """
 #RandomForest Regression
-def runRandomForest(train_X, train_y, validate_X, validate_y):
-    clf = RandomForestRegressor(n_estimators=100)
+def runRandomForest(train_X, train_y, validate_X, validate_y, max_depth = None):
+    clf = RandomForestRegressor(n_estimators=100, max_depth = max_depth)
     clf.fit(train_X, train_y)
     train_error = mse(train_y, clf.predict(train_X))**0.5
     test_error = mse(validate_y, clf.predict(validate_X))**0.5
