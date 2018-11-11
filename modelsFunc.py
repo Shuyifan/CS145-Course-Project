@@ -91,4 +91,17 @@ def runRandomForest(train_X, train_y, validate_X, validate_y, max_depth = None):
     test_error = mse(validate_y, clf.predict(validate_X))**0.5
     print (train_error)
     print (test_error)
-    return train_error, test_error
+    return train_error, test_error, clf
+
+"""
+The function write the predciotn into a submission .csv file accroding to the format provided by TA.
+
+:param outputDir: the output direction for the .csv file
+:param predcitY: the output prediction, the shape should be n x 1
+
+:type outputDir: str
+:type predcitY: numpy.ndarray
+"""
+def writeOutputSubmission(outputDir, predcitY):
+    df = pd.DataFrame(predcitY, columns=['stars'])
+    df.to_csv(outputDir, index = True, index_label = 'index')
