@@ -1,9 +1,9 @@
 import pandas as pd
 
-reviews_location = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/validate_queries.csv'
-bussiness_location = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/after preprocess/business_transformed.csv'
+reviews_location = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/test_queries.csv'
+bussiness_location = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/after preprocess/business_transformed_compacted.csv'
 users_location = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/after preprocess/users_transformed.csv'
-output_location = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/after preprocess/join_validate_queries.csv'
+output_location = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/after preprocess/join_test_queries_compacted.csv'
 
 reviews = pd.read_csv(reviews_location)
 bussiness = pd.read_csv(bussiness_location)

@@ -75,8 +75,6 @@ def dictProcess(attribute, data):
 
     output_df = pd.DataFrame(np.zeros((len(dict_list), len(keys))), columns=[attribute + "_" + s1 for s1 in keys])
 
-
-
     for i in range(len(dict_list)):
         if(isinstance(dict_list[i], dict)):
             for key, item in dict_list[i].items():
