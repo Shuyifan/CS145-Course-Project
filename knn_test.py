@@ -10,11 +10,8 @@ import string
 import time
 from sklearn.metrics import mean_squared_error as mse
 start_time = time.time()
-def getDataframe(filePath):
-    data = pd.read_csv(filePath)
-    return data
 
-numNeighbors = 9
+numNeighbors = 12 #change this
 
 #Idea: compute the knn test using the cosine distance as our metric. It makes no sense to compare the "distance" between
 #user_id and business_id, so I want to concatenate the attributes of users.csv and business.csv. Thus, each user/business pair
@@ -31,7 +28,7 @@ def distance_metric(x_1, x_2):
     x_1_norm=np.sum(x_1*x_1)
     x_2_norm=np.sum(x_2*x_2)
     
-    cosine_similarity=(np.sum( np.dot(x_1,x_2) ))/np.sqrt(x_1_norm*x_2_norm)
+    cosine_similarity=(np.sum( np.dot(x_1,x_2) ))/((float) (np.sqrt(x_1_norm*x_2_norm)))
     return 1-cosine_similarity
 
 
@@ -68,8 +65,6 @@ def knn_test(numNeighbors):
     #join_validate_queries.csv
     validate_csv = "validation_queries_compacted.csv"
     validating_input = pd.read_csv(validate_csv, header=0)
-    #validating_input.rename(columns=validating_input.iloc[0], inplace=True) #set column headers
-    #validating_input.drop(validating_input.index[0], inplace=True)
 
     validating_class = validating_input["stars_review"]
 
@@ -88,7 +83,7 @@ def knn_test(numNeighbors):
     predicted_y = user_neighbors.predict(test_this)
     
     print("Predicting Time: --- %s seconds ---" %(time.time()-start_time))
-    np.savetxt("knn_validate_predictions9.csv", predicted_y, delimiter=",")
+    np.savetxt("knn_validate_predictions7.csv", predicted_y, delimiter=",")
 
     num_test = len(test_this) #num_validate
     print("Calculating MSE...")
@@ -108,7 +103,7 @@ def knn_test(numNeighbors):
     predicted_y = user_neighbors.predict(test_this)
     
     print("Predicting Time: --- %s seconds ---" %(time.time()-start_time))
-    np.savetxt("knn_test_predictions9.csv", predicted_y, delimiter=",")
+    np.savetxt("knn_test_predictions7.csv", predicted_y, delimiter=",")
 
 knn_test(numNeighbors)
 print("Total Time: --- %s seconds ---" %(time.time()-start_time))
