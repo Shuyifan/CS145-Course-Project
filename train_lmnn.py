@@ -87,7 +87,7 @@ def train_LMNN():
     # RMSE
     print("Calculating MSE...")
     RMSE = mse(predicted_y, test_class) **0.5
-    print("VALIDATING RMSE=", RMSE)
+    print("TEST RMSE=", RMSE)
     
 
 train_LMNN()
