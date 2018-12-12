@@ -40,12 +40,12 @@ X = train_X.values
 y = train_y.values
 
 for max_depth in range(1, 50):
-    train_error, test_error, __ = models.runRandomForest(train_X, train_y, validate_X, validate_y, max_depth)
+    train_error, test_error, __ = models.runGradientBoostingRegressor(train_X, train_y, validate_X, validate_y, max_depth)
     cross_train_error, cross_test_error = 0, 0
     kf = KFold(n_splits = 5)
     for train_index, test_index in kf.split(X):
-        temp_train_error, temp_test_error, _ = models.runRandomForest(X[train_index, : ], y[train_index], \
-                                                                      X[test_index, : ], y[test_index], max_depth)
+        temp_train_error, temp_test_error, _ = models.runGradientBoostingRegressor(X[train_index, : ], y[train_index], \
+                                                                                X[test_index, : ], y[test_index], max_depth)
         cross_train_error += temp_train_error
         cross_test_error += temp_test_error
 
@@ -56,7 +56,7 @@ for max_depth in range(1, 50):
     print(max_depth, "*****", cross_test_error)
     print(max_depth, "*****", train_error)
     print(max_depth, "*****", test_error)
-    cross_train_errors.append(cross_test_error)
+    cross_train_errors.append(cross_train_error)
     cross_test_errors.append(cross_test_error)
     train_errors.append(train_error)
     test_errors.append(test_error)
