@@ -17,7 +17,7 @@ start_time = time.time()
 
 #try columsn A-S aka 1-19 (inclusive)
 train_csv = "train_queries_compacted.csv"
-numNeighbors = 50 #change this
+numNeighbors = 35 #change this
 
 #Idea: train the matrix M for use in mahalanobis metric function in other programs
 def train_LMNN():    
@@ -25,11 +25,12 @@ def train_LMNN():
     
     #store training target data
     print("Loading Training Data...")
-    training_input = pd.read_csv(train_csv, header=0).iloc[:,0:20]
+    training_input = pd.read_csv(train_csv, header=0)
     target_values = training_input['stars_review']
     remove_these_cols = []
     #load training data
     training_input.drop('stars_review', axis = 1, inplace = True)
+    training_input = training_input.iloc[:,0:20]
 
 
     print("Loading Validating Data...")
@@ -37,9 +38,10 @@ def train_LMNN():
     #validation_queries_compacted.csv
     #join_validate_queries.csv
     validate_csv = "validation_queries_compacted.csv"
-    validating_input = pd.read_csv(validate_csv, header=0) .iloc[:,0:20]
+    validating_input = pd.read_csv(validate_csv, header=0)
     validating_class = validating_input["stars_review"]
     validating_input.drop('stars_review', axis = 1, inplace = True)
+    validating_input = validating_input.iloc[:,0:20]
 
 
 
@@ -62,7 +64,7 @@ def train_LMNN():
     
     print("Predicting Time: --- %s seconds ---" %(time.time()-start_time))
         
-    np.savetxt("knn_validate_predictions_lmnn_50.csv", predicted_y, delimiter=",")
+    np.savetxt("knn_validate_predictions_lmnn_24.csv", predicted_y, delimiter=",")
 
     # RMSE
     print("Calculating MSE...")
@@ -79,15 +81,9 @@ def train_LMNN():
     print("Predicting TESTING....")
     test_this = lmnn.transform(test_input.values)
     predicted_y = knn.predict(test_this)
-    
-    print("Predicting Time: --- %s seconds ---" %(time.time()-start_time))
-        
-    np.savetxt("knn_test_predictions_lmnn_50.csv", predicted_y, delimiter=",")
+            
+    np.savetxt("knn_test_predictions_lmnn_24.csv", predicted_y, delimiter=",")
 
-    # RMSE
-    print("Calculating MSE...")
-    RMSE = mse(predicted_y, test_class) **0.5
-    print("TEST RMSE=", RMSE)
     
 
 train_LMNN()
