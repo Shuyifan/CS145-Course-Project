@@ -83,7 +83,7 @@ def knn_test(numNeighbors):
     predicted_y = user_neighbors.predict(test_this)
     
     print("Predicting Time: --- %s seconds ---" %(time.time()-start_time))
-    np.savetxt("knn_validate_predictions7.csv", predicted_y, delimiter=",")
+    np.savetxt("knn_validate_predictions.csv", predicted_y, delimiter=",")
 
     num_test = len(test_this) #num_validate
     print("Calculating MSE...")
@@ -103,7 +103,7 @@ def knn_test(numNeighbors):
     predicted_y = user_neighbors.predict(test_this)
     
     print("Predicting Time: --- %s seconds ---" %(time.time()-start_time))
-    np.savetxt("knn_test_predictions7.csv", predicted_y, delimiter=",")
+    np.savetxt("knn_test_predictions.csv", predicted_y, delimiter=",")
 
 knn_test(numNeighbors)
 print("Total Time: --- %s seconds ---" %(time.time()-start_time))

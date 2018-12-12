@@ -64,7 +64,7 @@ def train_LMNN():
     
     print("Predicting Time: --- %s seconds ---" %(time.time()-start_time))
         
-    np.savetxt("knn_validate_predictions_lmnn_24.csv", predicted_y, delimiter=",")
+    np.savetxt("knn_validate_predictions_lmnn.csv", predicted_y, delimiter=",")
 
     # RMSE
     print("Calculating MSE...")
@@ -82,7 +82,7 @@ def train_LMNN():
     test_this = lmnn.transform(test_input.values)
     predicted_y = knn.predict(test_this)
             
-    np.savetxt("knn_test_predictions_lmnn_24.csv", predicted_y, delimiter=",")
+    np.savetxt("knn_test_predictions_lmnn.csv", predicted_y, delimiter=",")
 
     
 
