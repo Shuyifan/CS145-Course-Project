@@ -1,10 +1,14 @@
 import csv
+import os
 from datetime import date
 
+path = os.path.dirname(os.getcwd())
+if not os.path.exists(path + "/Data/After Processing"):
+    os.makedirs(path + "/Data/After Processing") 
 csv.field_size_limit(1000000000)
 
-with open('users.csv', newline='') as infile:
-	with open('users_transformed.csv', 'w', newline='') as outfile:
+with open(path + '/Data/users.csv', newline='') as infile:
+	with open(path + '/Data/After Processing/users_transformed.csv', 'w', newline='') as outfile:
 		reader = csv.reader(infile)
 		writer = csv.writer(outfile)
 		

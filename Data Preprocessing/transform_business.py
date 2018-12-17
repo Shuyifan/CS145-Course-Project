@@ -1,9 +1,13 @@
 import pandas as pd
 import preprocessFunc as pp
 import numpy as np
+import os
 
-Location = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/business.csv'
-outputLocation = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/after preprocess/business_transformed_compacted.csv'
+path = os.path.dirname(os.getcwd())
+if not os.path.exists(path + "/Data/After Processing"):
+    os.makedirs(path + "/Data/After Processing") 
+Location = path + r'/Data/business.csv'
+outputLocation = path + r'/Data/After Processing/business_transformed_compacted.csv'
 
 data = pd.read_csv(Location)
 
