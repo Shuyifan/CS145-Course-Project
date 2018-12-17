@@ -1,18 +1,12 @@
 import pandas as pd
 import numpy as np
 import sys
+import os
 from pprint import pprint
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 import csv
 
-#with open('business.csv', "r") as infile:
-#    with open('train_review_transformed.csv', "w") as outfile:
-#        reader = csv.reader(infile)
-#        writer = csv.writer(outfile)
-#        add_dataset = getDataframe(
-
-# , , e.g., y = data['y']
 """
 Reads the data from CSV files, each attribute column can be obtained via its name
 
@@ -103,11 +97,16 @@ def transform_PCA(filePath, pca, standard_scaler, outfilename):
     output[ : , 1 :] = pca.transform(X)
     np.savetxt(outfilename, output, delimiter = ',', newline = '\n')
 
-join_train_queries = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/after preprocess/join_train_queries.csv'
-train_queries_pca = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/after preprocess/train_queries_pca.csv'
+path = os.path.dirname(os.getcwd())
+if not os.path.exists(path + "/Data/After Processing"):
+    os.makedirs(path + "/Data/After Processing") 
+#Please customize this by changing the input and output path location
+join_train_queries = path + r'/Data/After Processing/join_train_queries.csv'
+train_queries_pca = path + r'/Data/After Processing/train_queries_pca.csv'
 
-join_validate_queries = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/after preprocess/join_validate_queries.csv'
-validate_queries_pca = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/after preprocess/validate_queries_pca.csv'
+#Please customize this by changing the input and output path location
+join_validate_queries = path + r'/Data/After Processing/join_validate_queries.csv'
+validate_queries_pca = path + r'/Data/After Processing/validate_queries_pca.csv'
 
 pca_model, scalar = perform_PCA(join_train_queries, False, 0, True, train_queries_pca)
 transform_PCA(join_validate_queries, pca_model, scalar, validate_queries_pca)

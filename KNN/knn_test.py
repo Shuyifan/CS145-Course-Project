@@ -9,6 +9,8 @@ import csv
 import string
 import time
 from sklearn.metrics import mean_squared_error as mse
+import os
+
 start_time = time.time()
 
 numNeighbors = 12 #change this
@@ -37,11 +39,13 @@ def distance_metric(x_1, x_2):
 #initializes the knn algorithm and tests the validate_queries elements
 def knn_test(numNeighbors):    
 
-    
+    path = os.path.dirname(os.getcwd())
+    if not os.path.exists(path + "/Data/Submission"):
+        os.makedirs(path + "/Data/Submission") 
     #store training target data
     #train_queries_compacted.csv
     #join_training_queries.csv
-    train_csv = "train_queries_compacted.csv"
+    train_csv = path + "/Data/After Processing/train_queries_compacted.csv"
 
 
     target_values = pd.read_csv(train_csv, header=0)
@@ -63,7 +67,7 @@ def knn_test(numNeighbors):
     #load validating input data
     #validation_queries_compacted.csv
     #join_validate_queries.csv
-    validate_csv = "validation_queries_compacted.csv"
+    validate_csv = path + "/Data/After Processing/validation_queries_compacted.csv"
     validating_input = pd.read_csv(validate_csv, header=0)
 
     validating_class = validating_input["stars_review"]
@@ -82,8 +86,8 @@ def knn_test(numNeighbors):
     test_this = validating_input
     predicted_y = user_neighbors.predict(test_this)
     
-    print("Predicting Time: --- %s seconds ---" %(time.time()-start_time))
-    np.savetxt("knn_validate_predictions.csv", predicted_y, delimiter=",")
+    #print("Predicting Time: --- %s seconds ---" %(time.time()-start_time))
+    #np.savetxt("knn_validate_predictions7.csv", predicted_y, delimiter=",")
 
     num_test = len(test_this) #num_validate
     print("Calculating MSE...")
@@ -94,7 +98,7 @@ def knn_test(numNeighbors):
 
     #Run on actual test data
     #test_queries_compacted.csv
-    test_csv = "test_queries_compacted.csv"
+    test_csv = path + "/Data/After Processing/test_queries_compacted.csv"
     test_input = pd.read_csv(test_csv, header=0)
 
     #test using test_queries_compacted.csv   
@@ -103,7 +107,7 @@ def knn_test(numNeighbors):
     predicted_y = user_neighbors.predict(test_this)
     
     print("Predicting Time: --- %s seconds ---" %(time.time()-start_time))
-    np.savetxt("knn_test_predictions.csv", predicted_y, delimiter=",")
+    np.savetxt(path + "/Data/Submission/knn_test_predictions.csv", predicted_y, delimiter=",")
 
 knn_test(numNeighbors)
 print("Total Time: --- %s seconds ---" %(time.time()-start_time))

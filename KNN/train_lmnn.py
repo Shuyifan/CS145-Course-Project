@@ -12,11 +12,16 @@ from metric_learn import lmnn
 from pylmnn import LargeMarginNearestNeighbor as LMNN
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import mean_squared_error as mse
+import os
 
 start_time = time.time()
 
+path = os.path.dirname(os.getcwd())
+if not os.path.exists(path + "/Data/Submission"):
+    os.makedirs(path + "/Data/Submission") 
+
 #try columsn A-S aka 1-19 (inclusive)
-train_csv = "train_queries_compacted.csv"
+train_csv = path + "/Data/After Processing/train_queries_compacted.csv"
 numNeighbors = 35 #change this
 
 #Idea: train the matrix M for use in mahalanobis metric function in other programs
@@ -37,7 +42,7 @@ def train_LMNN():
     #load validating input data
     #validation_queries_compacted.csv
     #join_validate_queries.csv
-    validate_csv = "validation_queries_compacted.csv"
+    validate_csv = path + "/Data/After Processing/validation_queries_compacted.csv"
     validating_input = pd.read_csv(validate_csv, header=0)
     validating_class = validating_input["stars_review"]
     validating_input.drop('stars_review', axis = 1, inplace = True)
@@ -62,9 +67,9 @@ def train_LMNN():
     test_this = lmnn.transform(validating_input.values)
     predicted_y = knn.predict(test_this)
     
-    print("Predicting Time: --- %s seconds ---" %(time.time()-start_time))
+    #print("Predicting Time: --- %s seconds ---" %(time.time()-start_time))
         
-    np.savetxt("knn_validate_predictions_lmnn.csv", predicted_y, delimiter=",")
+    #np.savetxt("knn_validate_predictions_lmnn.csv", predicted_y, delimiter=",")
 
     # RMSE
     print("Calculating MSE...")
@@ -74,7 +79,7 @@ def train_LMNN():
 
     ###########################
     print("Loading Testing Data...")
-    test_csv = "test_queries_compacted.csv"
+    test_csv = path + "/Data/After Processing/test_queries_compacted.csv"
     test_input = pd.read_csv(test_csv, header=0).iloc[:,0:20]
     
     #predict
@@ -82,7 +87,7 @@ def train_LMNN():
     test_this = lmnn.transform(test_input.values)
     predicted_y = knn.predict(test_this)
             
-    np.savetxt("knn_test_predictions_lmnn.csv", predicted_y, delimiter=",")
+    np.savetxt(path + "/Data/Submission/knn_test_predictions_lmnn.csv", predicted_y, delimiter=",")
 
     
 
