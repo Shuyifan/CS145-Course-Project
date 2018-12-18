@@ -1,15 +1,19 @@
 import pandas as pd
 import numpy as np
+import os
 import datetime
 import modelsFunc as models
 
-df = pd.read_csv(r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/after preprocess/train_queries_compacted_more.csv')
+path = os.path.dirname(os.getcwd())
+if not os.path.exists(path + "/Data/Submission"):
+    os.makedirs(path + "/Data/Submission") 
+df = pd.read_csv(path + r'/Data/After Processing/train_queries_compacted_more.csv')
 train_y = df['stars_review']
 train_X = df.drop('stars_review', axis = 1)
-df = pd.read_csv(r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/after preprocess/validation_queries_compacted_more.csv')
+df = pd.read_csv(path + r'/Data/After Processing/validation_queries_compacted_more.csv')
 validate_y = df['stars_review']
 validate_X = df.drop('stars_review', axis = 1)
-df = pd.read_csv(r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/after preprocess/test_queries_compacted_more.csv')
+df = pd.read_csv(path + r'/Data/After Processing/test_queries_compacted_more.csv')
 test_X = df
 
 #drop some columns
@@ -45,7 +49,7 @@ train_error, test_error, clf = models.runRandomForest(train_X, train_y, validate
 result = clf.predict(test_X)
 endtime = datetime.datetime.now()
 print ('takes '+str((endtime - starttime).seconds)+' seconds')
-models.writeOutputSubmission(r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/submission14.csv', result)
+models.writeOutputSubmission(path + r'/Data/Submission/submission_rfr.csv', result)
 
 #Run Random Forest Classifiers
 starttime = datetime.datetime.now()
@@ -53,7 +57,7 @@ train_error, test_error, clf = models.runRandomForestClassifier(train_X, train_y
 result = clf.predict(test_X)
 endtime = datetime.datetime.now()
 print ('takes '+str((endtime - starttime).seconds)+' seconds')
-models.writeOutputSubmission(r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/submission14.csv', result)
+models.writeOutputSubmission(path + r'/Data/Submission/submission_rfc.csv', result)
 
 #Run Gradient Boosting Regression
 starttime = datetime.datetime.now()
@@ -61,4 +65,4 @@ train_error, test_error, clf = models.runGradientBoostingRegressor(train_X, trai
 result = clf.predict(test_X)
 endtime = datetime.datetime.now()
 print ('takes '+str((endtime - starttime).seconds)+' seconds')
-models.writeOutputSubmission(r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/submission14.csv', result)
+models.writeOutputSubmission(path + r'/Data/Submission/submission_gbr.csv', result)

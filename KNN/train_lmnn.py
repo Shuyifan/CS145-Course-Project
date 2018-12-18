@@ -24,7 +24,9 @@ if not os.path.exists(path + "/Data/Submission"):
 train_csv = path + "/Data/After Processing/train_queries_compacted.csv"
 numNeighbors = 35 #change this
 
-#Idea: train the matrix M for use in mahalanobis metric function in other programs
+"""
+Train the matrix M for use in mahalanobis metric function in other programs
+"""
 def train_LMNN():    
 
     

@@ -1,11 +1,13 @@
 import pandas as pd
 import numpy as np
+import os
 from sklearn.model_selection import KFold
 import datetime
 import modelsFunc as models
 
-train_queries = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/after preprocess/train_queries_compacted_more.csv'
-validate_queries = r'/mnt/c/Users/shuyi/OneDrive/CS145/Data/after preprocess/validation_queries_compacted_more.csv'
+path = os.path.dirname(os.getcwd())
+train_queries = path + r'/Data/After Processing/train_queries_compacted_more.csv'
+validate_queries = path + r'/Data/After Processing/validation_queries_compacted_more.csv'
 
 train_data = pd.read_csv(train_queries)
 validate_data = pd.read_csv(validate_queries)

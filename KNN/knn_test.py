@@ -21,22 +21,36 @@ numNeighbors = 12 #change this
 #currently, all attributes are weighted evenly.
 
 
-#parameters: x_1, x_2, two input variables [user_id, business_id]
-#returns: cosine distance between the two based on user attributes and business attributes
+"""
+Calculate the cosine distances based on attributes
+
+:param x_1: vector x_1
+:param x_2: vector x_2
+
+:type x_1: numpy.ndarray
+:type x_2: numpy.ndarray
+
+:returns distance: cosine distance between the two based on user attributes and business attributes
+
+:rtype distance: float
+"""
 def distance_metric(x_1, x_2):
-    #use cosine_distances based on attributes
-    #x_1, x_2 are ['user_id', 'business_id']
-    #return sklearn.metrics.pairwise.cosine_distances(x_1, x_2)
-    x_1_norm=np.sum(x_1*x_1)
-    x_2_norm=np.sum(x_2*x_2)
+    x_1_norm = np.sum(x_1*x_1)
+    x_2_norm = np.sum(x_2*x_2)
     
-    cosine_similarity=(np.sum( np.dot(x_1,x_2) ))/((float) (np.sqrt(x_1_norm*x_2_norm)))
-    return 1-cosine_similarity
+    cosine_similarity = (np.sum( np.dot(x_1,x_2) ))/((float) (np.sqrt(x_1_norm*x_2_norm)))
+    distance = 1 - cosine_similarity
+    return distance
 
 
+"""
+Use cosine distance to compute K closest neighbors. Initializes the knn algorithm and tests the validate_queries elements
 
-#use cosine distance to compute K closest neighbors
-#initializes the knn algorithm and tests the validate_queries elements
+:param numNeighbors: the hyperparameter K in the KNN algorithm.
+
+:type numNeighbors: int
+
+"""
 def knn_test(numNeighbors):    
 
     path = os.path.dirname(os.getcwd())
