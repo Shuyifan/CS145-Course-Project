@@ -2,57 +2,71 @@
 
 Using datasets provided by Yelp, our aim is to predict the rating of a user visiting a restaurant for the first time. 
 We are given data on individual users and businesses. We test this data with different algorithms, 
-and assess which of them perform the best. </br >
+and assess which of them perform the best.
+
 The details of the challenge can be shown on Kaggle website(https://www.kaggle.com/c/yelpratingprediction), where our team rank no.4 in this competition.
 
 ## Files in thie Project:
 
 ### Files in Root Directory:
-**modelsFunc.py:** This Python file contains all the function to train the model and validate the models. These models contains linear regression, logistic regression, random forest regression, random forest classifier, gradient boosting regression. This Python file also contains a function to write a test result in the format of “sample_submission.csv”.
+**modelsFunc.py:** </br>
+This Python file contains all the function to train the model and validate the models. These models contains linear regression, logistic regression, random forest regression, random forest classifier, gradient boosting regression. This Python file also contains a function to write a test result in the format of “sample_submission.csv”.
 
-**run_DifferentModels.py:** Run the models with specific hyper-parameter. These models contains linear regression, logistic regression, random forest regression, random forest classifier, gradient boosting regression. </br>
+**run_DifferentModels.py:** </br>
+Run the models with specific hyper-parameter. These models contains linear regression, logistic regression, random forest regression, random forest classifier, gradient boosting regression. </br>
 To run: python3 run_DifferentModels.py
 
-**runGradientBoostingRegressor_usingDifferentParameters.py:** Run the gradient boosting regression with different hyper-parameter (max depth) to optimize the best parameter. </br>
+**runGradientBoostingRegressor_usingDifferentParameters.py:**</br>
+Run the gradient boosting regression with different hyper-parameter (max depth) to optimize the best parameter. </br>
 To run: python3 runGradientBoostingRegressor_usingDifferentParameters.py.py
 
-**runRandomForestRegressor_usingDifferentParameters.py:** Run the random forest regression with different hyper-parameter (max depth) to optimize the best parameter.</br>
-To run: python3 runRandomForest_usingDifferentParameters.py (The training data and validation data should be specified in the code)
+**runRandomForestRegressor_usingDifferentParameters.py:** </br>
+Run the random forest regression with different hyper-parameter (max depth) to optimize the best parameter.</br>
+To run: python3 runRandomForest_usingDifferentParameters.py
 
-**runRandomForestClassifier_usingDifferentParameters.py:** Run the random forest classification with different hyper-parameter (max depth) to optimize the best parameter.</br>
+**runRandomForestClassifier_usingDifferentParameters.py:** </br>
+Run the random forest classification with different hyper-parameter (max depth) to optimize the best parameter.</br>
 To run: python3 runRandomForestClassifier_usingDifferentParameters.py
 
 ### Files in "/Data Preprocessing/":
-**cluster_by_category.py:** If you have the categories of businesses extracted in a one-hot encoding in a separate file labeled business_categories.csv, you can run this script to cluster them an obtain a new label that summarizes that data.</br>
+**cluster_by_category.py:** </br>
+If you have the categories of businesses extracted in a one-hot encoding in a separate file labeled business_categories.csv, you can run this script to cluster them an obtain a new label that summarizes that data.</br>
 To run python cluster_by_category.py
 
-**merge.py:** Merge the queries file (training_reviews.csv, validate_queries.csv, and test_queries.csv), users file (users.csv), and business file (business.csv) into one single file with all the features.</br>
+**merge.py:** </br>
+Merge the queries file (training_reviews.csv, validate_queries.csv, and test_queries.csv), users file (users.csv), and business file (business.csv) into one single file with all the features.</br>
 To run: python3 merge.py
 
-**pca.py:** Run the PCA to condense the data.</br>
+**pca.py:** </br>
+Run the PCA to condense the data.</br>
 To run: python3 pca.py
 
-**preprocessFunc.py:** Contains all the function needed for the preprocessing. It contains the method to deal with list-like features, dict-like features, time period features, category features, numeric features with missing number.
+**preprocessFunc.py:** </br>
+Contains all the function needed for the preprocessing. It contains the method to deal with list-like features, dict-like features, time period features, category features, numeric features with missing number.
 
-**transform_business.py:** Transform features in the user file. Generated file is called users_transformed.csv.</br>
+**transform_business.py:** </br>
+Transform features in the user file. Generated file is called users_transformed.csv.</br>
 To run: python3 transform_business.py
 
-**transform_users.py:** Transform features in the user file. Generated file is called users_transformed.csv.</br>
+**transform_users.py:** </br>
+Transform features in the user file. Generated file is called users_transformed.csv.</br>
 To run: python3 transform_users.py
 
 ### Files in "/SVM/":
 
-**svm.py:** Trains and runs multiclass support vector machine classification model. Preprocessed input files for training, verification and testing are already available in this folder. </br>
+**svm.py:** </br>
+Trains and runs multiclass support vector machine classification model. Preprocessed input files for training, verification and testing are already available in this folder. </br>
 To run: python3 svm.py 
 
 ### Files in "/KNN/":
 
-**knn_test.py:** Simple implementation of knn using cosine distance. The variable numNeighbors is used as k for both lmnn and knn. 
+**knn_test.py:** </br>
+Simple implementation of knn using cosine distance. The variable numNeighbors is used as k for both lmnn and knn. 
 Needs the three csv files included in folder. 
-Results are saved in csv files "knn_validate_predictions_lmnn.csv" "knn_validate_predictions.csv" and "knn_test_predictions.csv". RMSE of validating data is reported in terminal.
+Results are saved in csv files "knn_validate_predictions_lmnn.csv" "knn_validate_predictions.csv" and "knn_test_predictions.csv". RMSE of validating data is reported in terminal.</br>
 To run: python knn_test.py
 
-**train_lmnn.py:** 
+**train_lmnn.py:** </br>
 Simple implementation of knn using Mahalanobis distance metric trained by lmnn. The variable num_neighbors is used as k for both lmnn and knn. 
 Needs the three csv files included in folder.
 Results are saved in csv files "knn_validate_predictions_lmnn.csv" and “knn_test_predictions_lmnn.csv"
@@ -61,6 +75,7 @@ To run: python train_lmnn.py
 
 ### Files in "/Neural Net/":
 
-**a simple neural network.py:** A one-layer simple neural network, iterating over different number of hidden units and activation function to find the best net. 
+**a simple neural network.py:** </br>
+A one-layer simple neural network, iterating over different number of hidden units and activation function to find the best net. 
 Needs 'join_train_queries.csv' and 'join_validate_queries.csv' files generated by codes in data preprocessing folder.</br>
 To run: python a simple neural network.py
